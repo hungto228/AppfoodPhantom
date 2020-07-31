@@ -10,5 +10,6 @@
     <string name="loginWithFaceBook">Đăng nhập bằng FaceBook</string>
     <string name="loginWithGoogle">Đăng nhập bằng Google</string>
     <string name="forgotPassword">Quên mật khẩu ?</string>
+    <string name="restorePassword">Khôi phục mật khẩu</string>
 
 </resources>

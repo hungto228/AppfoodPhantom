@@ -2,6 +2,7 @@ package com.example.appfood_phantom.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +13,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -21,7 +21,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +38,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
-    TextView mForgotPassword,mResgitterAccount;
+    TextView mForgotPassword, mResgitterAccount;
     MaterialEditText mEmail, mPassWord;
     Button btnLogin, btnLoginGoogle;
     LoginButton btnLoginFaceBook;
@@ -50,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
-         mCallbackManagerFaceBook = CallbackManager.Factory.create();
+        mCallbackManagerFaceBook = CallbackManager.Factory.create();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Đăng nhập");
         actionBar.setDisplayHomeAsUpEnabled(false);
@@ -60,8 +64,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 //LoginManager.getInstance().logOut();
         mEmail = findViewById(R.id.edt_email);
         mPassWord = findViewById(R.id.edt_password);
-        mForgotPassword=findViewById(R.id.tv_forGotPassword);
-        mResgitterAccount=findViewById(R.id.tv_resgiterAccount);
+        mForgotPassword = findViewById(R.id.tv_forGotPassword);
+        mResgitterAccount = findViewById(R.id.tv_resgiterAccount);
 
         btnLogin = findViewById(R.id.btn_login);
         btnLoginFaceBook = findViewById(R.id.btn_signFaceBook);
@@ -97,15 +101,43 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //login acc
-                Toast.makeText(LoginActivity.this, "dang nhap", Toast.LENGTH_SHORT).show();
+                String email = mEmail.getText().toString();
+                String password = mPassWord.getText().toString();
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(LoginActivity.this, "Hãy điền đu thông tin", Toast.LENGTH_SHORT).show();
+                } else {
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(LoginActivity.this, HomePage.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Xem lại kết nối, thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
         mResgitterAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, ResgiterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ResgiterActivity.class);
                 startActivity(intent);
+            }
+        });
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
             }
         });
 
@@ -136,10 +168,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void authencationFireBase(String tokenId) {
 
         if (CHECK_PROVIDER_SIGNIN == 1) {
-            AuthCredential  authCredential = GoogleAuthProvider.getCredential(tokenId, null);
+            AuthCredential authCredential = GoogleAuthProvider.getCredential(tokenId, null);
             auth.signInWithCredential(authCredential);
         } else if (CHECK_PROVIDER_SIGNIN == 2) {
-            AuthCredential   authCredential = FacebookAuthProvider.getCredential(tokenId);
+            AuthCredential authCredential = FacebookAuthProvider.getCredential(tokenId);
             auth.signInWithCredential(authCredential);
         }
     }
@@ -167,8 +199,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 String tokenID = signInAccount.getIdToken();
                 authencationFireBase(tokenID);
             }
-        }else {
-            mCallbackManagerFaceBook.onActivityResult(requestCode,resultCode,data);
+        } else {
+            mCallbackManagerFaceBook.onActivityResult(requestCode, resultCode, data);
         }
     }
 
