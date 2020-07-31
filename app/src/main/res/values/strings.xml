@@ -1,6 +1,14 @@
 <resources>
+    <string name="app_id">236888387285004</string>
     <string name="app_name">appfood_phantom</string>
     <string name="version"> Phiên bản </string>
     <string name="nameCompany">Phantom Food</string>
     <string name="loading"> Đang  tải</string>
+    <string name="login">Đăng nhập</string>
+    <string name="resgitter">Đăng ký </string>
+    <string name="or">----------------------------------Hoặc----------------------------------</string>
+    <string name="loginWithFaceBook">Đăng nhập bằng FaceBook</string>
+    <string name="loginWithGoogle">Đăng nhập bằng Google</string>
+    <string name="forgotPassword">Quên mật khẩu ?</string>
+
 </resources>

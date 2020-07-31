@@ -1,8 +1,10 @@
 package com.example.appfood_phantom.View;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -31,6 +33,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         try {
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             mVersion.setText( getString(R.string.version)+" "+ packageInfo.versionName);
+            Handler handler=new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
+                    finish();
+                }
+            },2000);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
