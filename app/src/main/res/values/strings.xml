@@ -11,5 +11,9 @@
     <string name="loginWithGoogle">Đăng nhập bằng Google</string>
     <string name="forgotPassword">Quên mật khẩu ?</string>
     <string name="restorePassword">Khôi phục mật khẩu</string>
+    <string name="notMember">Bạn không phải thành viên ?</string>
+    <string name="fullInfomation">Xin vui lòng điền đầy đủ thông tin </string>
+    <string name="places">Ở chỗ nào ?</string>
+    <string name="food">Ăn gì ??</string>
 
 </resources>
