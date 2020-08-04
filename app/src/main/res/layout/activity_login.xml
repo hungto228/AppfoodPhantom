@@ -26,11 +26,11 @@
             android:id="@+id/imgView_background"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/foodytext" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:drawableLeft="@drawable/ic_user_white"
             app:met_floatingLabel="normal"/>
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +64,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-
+             <View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:layout_weight="1"
+    android:background="@color/black"
+    android:layout_gravity="center"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,12 +77,17 @@
                 android:layout_marginRight="10dp"
                 android:textColor="@color/black"
                 android:text="@string/or"/>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:layout_gravity="center"/>
         </LinearLayout>
         <Button
             android:drawableLeft="@drawable/icon_google"
             android:background="#ffffff"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:textAllCaps="false"
             android:id="@+id/btn_signInGoogle"
             android:layout_width="match_parent"
@@ -116,6 +126,13 @@
                 android:textColor="@color/black"
                 android:text="@string/resgitter" />
         </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/tranparentBackground"
+            android:id="@+id/btn_changerlanguage"
+            android:text="language"/>
     </LinearLayout>
 
 </RelativeLayout>

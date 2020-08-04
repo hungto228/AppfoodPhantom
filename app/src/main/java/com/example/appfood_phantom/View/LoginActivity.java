@@ -1,6 +1,10 @@
 package com.example.appfood_phantom.View;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -32,15 +36,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FirebaseAuth.AuthStateListener {
     TextView mForgotPassword, mResgitterAccount;
     MaterialEditText mEmail, mPassWord;
-    Button btnLogin, btnLoginGoogle;
+    Button btnLogin, btnLoginGoogle,btnLanguage;
     LoginButton btnLoginFaceBook;
     GoogleApiClient apiClient;
     public static int REQUESTCODE_SIGNIN_GOOGLE = 99;
@@ -52,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadlocate();
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         mCallbackManagerFaceBook = CallbackManager.Factory.create();
@@ -66,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mPassWord = findViewById(R.id.edt_password);
         mForgotPassword = findViewById(R.id.tv_forGotPassword);
         mResgitterAccount = findViewById(R.id.tv_resgiterAccount);
-
+        btnLanguage=findViewById(R.id.btn_changerlanguage);
         btnLogin = findViewById(R.id.btn_login);
         btnLoginFaceBook = findViewById(R.id.btn_signFaceBook);
         btnLoginFaceBook.setReadPermissions("email", "public_profile");
@@ -140,6 +148,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
             }
         });
+        btnLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChangeDisplayLanguage();
+            }
+        });
 
     }
 
@@ -150,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
         auth.addAuthStateListener(this);
+
     }
 
     @Override
@@ -220,5 +235,49 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
         }
+    }
+    //TODO: change language
+    private void showChangeDisplayLanguage() {
+        final String[] listiteam = { "English","french", "Viet nam"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setTitle("change languager");
+        builder.setSingleChoiceItems(listiteam, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    setlocate("en");
+                    Toast.makeText(LoginActivity.this, "English", Toast.LENGTH_SHORT).show();
+                    recreate();
+                }else  if (which==1){
+                    setlocate("fr");
+                    Toast.makeText(LoginActivity.this, "French", Toast.LENGTH_SHORT).show();
+                    recreate(); }
+                else if (which==2){
+                    setlocate("vi-rVN");
+                }
+                dialog.dismiss(); }
+        });
+        AlertDialog mdialog=builder.create();
+        mdialog.show();
+    }
+
+    private void setlocate(String laguage) {
+        Locale locale=new Locale(laguage);
+        Locale.setDefault(locale);;
+        Configuration configuration=new Configuration();
+        configuration.locale=locale;
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+        //save data in shared preferences
+        SharedPreferences.Editor  editor=getSharedPreferences("setting",MODE_PRIVATE).edit();
+        editor.putString("my_lang",laguage);
+        editor.apply();
+
+
+    }
+    // load language  save  in share preference
+    public void loadlocate(){
+        SharedPreferences preferences=getSharedPreferences("setting", Activity.MODE_PRIVATE);
+        String language=preferences.getString("my_lang","");
+        setlocate(language);
     }
 }

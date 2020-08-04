@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_id">236888387285004</string>
+    <string name="app_name">Food.vn</string>
+    <string name="version"> Version</string>
+    <string name="nameCompany">Phantom Food</string>
+    <string name="loading"> Loading</string>
+    <string name="login">Login</string>
+    <string name="resgitter">Resgiter </string>
+    <string name="or">or</string>
+    <string name="loginWithFaceBook">Login with FaceBook</string>
+    <string name="loginWithGoogle">Login with Google</string>
+    <string name="forgotPassword">Forgot PassWord?</string>
+    <string name="restorePassword">Restore Password</string>
+    <string name="notMember">Your are not member ?</string>
+    <string name="fullInfomation">Please fill in the infomation </string>
+    <string name="places">Place ?</string>
+    <string name="food">Food ??</string>
+    <string name="newhot">News</string>
+    <string name="category">Category</string>
+    <string name="areaPlace">AreaPlace</string>
+    <string name="almostThere">Almost There</string>
+    <string name="delivery">Delivery</string>
+    <string name="gameandfun">Game &amp;&amp; fun</string>
+    <string name="rate">Rate</string>
+    <string name="blogs">Blog</string>
+    <string name="topMember">Top Member</string>
+
+</resources>

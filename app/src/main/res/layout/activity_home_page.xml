@@ -3,9 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linia"
     tools:context=".View.HomePage">
 
     <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorAccent">
@@ -13,6 +17,12 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:background="@color/black" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="right"
             android:background="@color/black" />
 
         <RadioGroup
@@ -42,12 +52,16 @@
 
                 android:text="@string/places" />
         </RadioGroup>
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="right"
-            android:background="@color/black" />
     </androidx.appcompat.widget.Toolbar>
 
 
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_container"/>
+<androidx.viewpager.widget.ViewPager
+    android:id="@+id/viewpager_home"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"/>
 </LinearLayout>

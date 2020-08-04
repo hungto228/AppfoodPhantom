@@ -36,6 +36,7 @@ public class ForgotPassword extends AppCompatActivity {
         actionBar.setTitle("Quên mật khẩu");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+        auth=FirebaseAuth.getInstance();
         mResgitertv=findViewById(R.id.tv_resgiterAccount);
         mEmailEdt = findViewById(R.id.edt_email);
         mRestorePasswordBtn = findViewById(R.id.btn_restorePassword);
@@ -44,7 +45,7 @@ public class ForgotPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mEmailEdt.getText().toString();
 //                android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-                if (!TextUtils.isEmpty(email) && checkEmail(email)) {
+                if (TextUtils.isEmpty(email) && checkEmail(email)) {
                     Toast.makeText(ForgotPassword.this, "Hãy điền đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
                     auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -60,11 +61,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 Toast.makeText(ForgotPassword.this, error, Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ForgotPassword.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+
                     });
                 }
             }

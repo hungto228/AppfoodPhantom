@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">236888387285004</string>
+    <string name="app_name">Food.vn</string>
+    <string name="version"> Version</string>
+    <string name="nameCompany">Phantom Food</string>
+    <string name="loading"> Chargement</string>
+     <string name="login">S\'identifier</string>
+    <string name="resgitter">S\'inscrire </string>
+    <string name="or">ou</string>
+    <string name="loginWithFaceBook">Se connecter avec Facebook</string>
+    <string name="loginWithGoogle">Se connecter avec Google</string>
+    <string name="forgotPassword">Mot de passe oublié?</string>
+    <string name="restorePassword">Restaurer le mot de passe</string>
+    <string name="notMember">Vous n\'êtes pas membre ?</string>
+    <string name="fullInfomation">Please fill in the infomation </string>
+    <string name="places">Veuillez remplir les informations ?</string>
+    <string name="food">Aliments??</string>
+    <string name="newhot">Nouvelles</string>
+    <string name="category">Catégorie</string>
+    <string name="areaPlace">ZonePlace</string>
+    <string name="almostThere">Presque là</string>
+    <string name="delivery">Livraison</string>
+    <string name="gameandfun">jeu et amusement</string>
+    <string name="rate">Taux</string>
+    <string name="blogs">Blog</string>
+    <string name="topMember">Top membre</string>
+</resources>

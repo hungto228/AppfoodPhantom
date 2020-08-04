@@ -41,14 +41,14 @@ ProgressDialog pd;
         mResgiter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.setMessage("Đang đăng ký");
-                pd.show();
+
+
                 String email = mEmailEdt.getText().toString();
                 String password = mPasswordEdt.getText().toString();
                 String enterThePassword = mEnterThePassword.getText().toString();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(enterThePassword)) {
                     Toast.makeText(ResgiterActivity.this, "Không được bỏ trống thông tin", Toast.LENGTH_SHORT).show();
-                } else if (password.trim().length() <= 6) {
+                } else if (password.trim().length() < 6) {
                     Toast.makeText(ResgiterActivity.this, "Mật khẩu ít nhất 6 ký tự !", Toast.LENGTH_SHORT).show();
                 } else if (!enterThePassword.equals(password)) {
                     Toast.makeText(ResgiterActivity.this, "Mật khẩu nhập lại khác với ban đầu?", Toast.LENGTH_SHORT).show();
@@ -68,6 +68,7 @@ ProgressDialog pd;
                         }
                     });
                 }
+
             }
         });
     }
